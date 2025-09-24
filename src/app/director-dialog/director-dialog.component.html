@@ -1,0 +1,5 @@
+<h2>{{ director.name }}</h2>
+<p><strong>Born:</strong> {{ director.birth }}</p>
+<p *ngIf="director.death"><strong>Died:</strong> {{ director.death }}</p>
+<p>{{ director.bio }}</p>
+<button mat-button (click)="dialogRef.close()">Close</button>
