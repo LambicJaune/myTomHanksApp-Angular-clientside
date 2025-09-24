@@ -5,6 +5,22 @@ import { Router } from '@angular/router';
 
 import { FetchApiDataService } from '../fetch-api-data.service';
 
+// Define a type-safe interface for the backend user
+interface BackendUser {
+    Username: string;
+    Email: string;
+    Birthday: string;
+    FavoriteMovies?: string[];
+}
+
+// Define a normalized frontend user type
+interface FrontendUser {
+    username: string;
+    email: string;
+    birthday: string;
+    favoriteMovies: string[];
+}
+
 @Component({
     selector: 'app-user-login-form',
     standalone: false,
@@ -12,34 +28,43 @@ import { FetchApiDataService } from '../fetch-api-data.service';
     styleUrls: ['./user-login-form.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
-    @Input() userData = { Username: '', Password: '' };
+    @Input() userData = { username: '', password: '' };
 
     constructor(
-        public fetchApiData: FetchApiDataService,
-        public dialogRef: MatDialogRef<UserLoginFormComponent>,
-        public snackBar: MatSnackBar,
-        public router: Router
+        private fetchApiData: FetchApiDataService,
+        private dialogRef: MatDialogRef<UserLoginFormComponent>,
+        private snackBar: MatSnackBar,
+        private router: Router
     ) { }
 
     ngOnInit(): void { }
 
-    /*
-     * Sendsthe form inputs to the backend
+    /**
+     * Sends the login request to the backend and stores normalized user info
      */
     userLogin(): void {
         this.fetchApiData.userLogin(this.userData).subscribe(
-            (result) => {
-                localStorage.setItem('user', JSON.stringify(result.user));
+            (result: { user: BackendUser; token: string }) => {
+                // Normalize backend user to frontend lowercase keys
+                const loggedInUser: FrontendUser = {
+                    username: result.user.Username,
+                    email: result.user.Email,
+                    birthday: result.user.Birthday,
+                    favoriteMovies: result.user.FavoriteMovies || []
+                };
+
+                // Save to localStorage
+                localStorage.setItem('user', JSON.stringify(loggedInUser));
                 localStorage.setItem('token', result.token);
-                localStorage.setItem('username', result.user.Username); // <-- ADD THIS
+                localStorage.setItem('username', loggedInUser.username);
+
                 this.dialogRef.close();
                 this.snackBar.open('Login successful', 'OK', { duration: 2000 });
-                this.router.navigate(["movies"]);
+                this.router.navigate(['movies']);
             },
             (error) => {
-                this.snackBar.open('Login failed', 'OK', {
-                    duration: 2000
-                });
+                console.error('Login failed:', error);
+                this.snackBar.open('Login failed', 'OK', { duration: 2000 });
             }
         );
     }
