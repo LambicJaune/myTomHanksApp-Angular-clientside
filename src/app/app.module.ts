@@ -14,15 +14,18 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 
@@ -32,7 +35,8 @@ const appRoutes: Routes = [
         UserRegistrationFormComponent,
         UserLoginFormComponent,
         MovieCardComponent,
-        WelcomePageComponent
+        WelcomePageComponent,
+        UserProfileComponent
     ],
     imports: [
         BrowserModule,
@@ -47,6 +51,7 @@ const appRoutes: Routes = [
         MatSnackBarModule,
         MatIconModule,
         FormsModule,
+        MatGridListModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [],

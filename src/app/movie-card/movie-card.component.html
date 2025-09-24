@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <div style="padding-top: 3rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-    <mat-card *ngFor="let movie of movies" style="flex: 1 1 calc(300px); max-width: 300px;">
-        <mat-card-header>
-            <mat-card-title>{{ movie.title }}</mat-card-title>
-            <mat-card-subtitle>Directed by: {{ movie.director.name }}</mat-card-subtitle>
-        </mat-card-header>
+  <mat-card *ngFor="let movie of movies" style="flex: 1 1 calc(300px); max-width: 300px;">
+    <mat-card-header>
+      <mat-card-title>{{ movie.title }}</mat-card-title>
+      <mat-card-subtitle>Directed by: {{ movie.director.name }}</mat-card-subtitle>
+    </mat-card-header>
 
-        <img [src]="movie.imagePath" [alt]="movie.title" style="width: 100%; height: auto;" />
+    <img [src]="movie.imagePath" [alt]="movie.title" style="width: 100%; height: auto;" />
 
-        <mat-card-actions>
-            <button mat-button color="primary">Genre</button>
-            <button mat-button color="primary">Director</button>
-            <button mat-button color="primary">Synopsis</button>
-            <mat-icon>favorite_border</mat-icon>
-        </mat-card-actions>
-    </mat-card>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="getGenre(movie.genre.name)">
+        Genre
+      </button>
+      <button mat-button color="primary" (click)="getDirector(movie.director.name)">
+        Director
+      </button>
+      <button mat-button color="primary">
+        Synopsis
+      </button>
+      <!-- make favorite an actual button -->
+      <button mat-icon-button color="warn" (click)="toggleFavorite(movie)">
+    <mat-icon>{{ isFavorite(movie) ? 'favorite' : 'favorite_border' }}</mat-icon>
+  </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

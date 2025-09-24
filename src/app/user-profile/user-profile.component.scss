@@ -1,0 +1,38 @@
+.profile-container {
+  padding: 1rem;
+}
+
+.profile-card {
+  margin-bottom: 2rem;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.movie-header {
+  flex-shrink: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12); /* subtle separator */
+}
+
+.movie-card img {
+  object-fit: contain; /* no cropping */
+  max-height: 350px;
+  width: 100%;
+}
+
+.movie-card mat-card-actions {
+  margin-top: auto;
+}
+
+
+
