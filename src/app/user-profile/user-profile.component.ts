@@ -3,6 +3,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.component';
 
 @Component({
     selector: 'app-user-profile',
@@ -18,11 +19,10 @@ export class UserProfileComponent implements OnInit {
     };
 
     favoriteMovies: any[] = [];
-
-    editingField: string | null = null; // track which field is being edited
+    editingField: string | null = null; // which field is being edited
     tempValue: string = '';             // temporary value while editing
 
-    currentPassword: string = ''; // for password change flow
+    currentPassword: string = '';
     newPassword: string = '';
 
     constructor(
@@ -36,17 +36,11 @@ export class UserProfileComponent implements OnInit {
         this.getUser();
     }
 
-    /**
-     * Get user data from API and populate display + favorites
-     */
+    /** Get user data and hydrate favorites */
     getUser(): void {
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('username');
-
-        if (!token || !username) {
-            console.error('No token or username found. User must log in.');
-            return;
-        }
+        if (!token || !username) return;
 
         this.fetchApiData.getUser(username, token).subscribe((resp: any) => {
             if (!resp) return;
@@ -55,22 +49,16 @@ export class UserProfileComponent implements OnInit {
             this.user.Email = resp.Email || '';
             this.user.Birthday = resp.Birthday ? resp.Birthday.substring(0, 10) : '';
 
-            // hydrate favorites with full movie objects
             const favoriteIds: string[] = resp.FavoriteMovies || [];
             this.fetchApiData.getAllMovies().subscribe((allMovies: any[]) => {
                 this.favoriteMovies = allMovies.filter(m => favoriteIds.includes(m._id));
             });
-
-            console.log('User data:', this.user);
         });
     }
 
-    /**
-     * Start editing a field
-     */
+    /** Start editing a field */
     startEdit(field: string): void {
         this.editingField = field;
-
         if (field === 'Password') {
             this.currentPassword = '';
             this.newPassword = '';
@@ -79,9 +67,7 @@ export class UserProfileComponent implements OnInit {
         }
     }
 
-    /**
-     * Cancel edit
-     */
+    /** Cancel editing */
     cancelEdit(): void {
         this.editingField = null;
         this.tempValue = '';
@@ -89,13 +75,11 @@ export class UserProfileComponent implements OnInit {
         this.newPassword = '';
     }
 
-    /**
-     * Save an edited field
-     */
+    /** Save edited field */
     saveEdit(field: string): void {
         const currentUsername = localStorage.getItem('username') || this.user.Username;
 
-        let updatedUser: any = {
+        const updatedUser: any = {
             Username: this.user.Username,
             Email: this.user.Email,
             Birthday: this.user.Birthday
@@ -108,18 +92,14 @@ export class UserProfileComponent implements OnInit {
             }
             updatedUser.Password = this.newPassword;
         } else {
-            if (field === 'Username' || field === 'Email' || field === 'Birthday') {
-                updatedUser[field] = this.tempValue;
-            }
+            updatedUser[field] = this.tempValue;
         }
 
         this.fetchApiData.editUser(currentUsername, updatedUser).subscribe(
             (result: any) => {
                 this.snackBar.open(`${field} updated successfully`, 'OK', { duration: 2000 });
 
-                if (result?.token) {
-                    localStorage.setItem('token', result.token);
-                }
+                if (result?.token) localStorage.setItem('token', result.token);
 
                 if (field === 'Username') {
                     localStorage.setItem('username', this.tempValue);
@@ -140,9 +120,7 @@ export class UserProfileComponent implements OnInit {
         );
     }
 
-    /**
-     * Remove favorite movie
-     */
+    /** Remove favorite movie */
     removeFavorite(movieId: string): void {
         this.fetchApiData.deleteFavoriteMovie(movieId).subscribe(() => {
             this.snackBar.open('Removed from favorites', 'OK', { duration: 2000 });
@@ -150,9 +128,7 @@ export class UserProfileComponent implements OnInit {
         });
     }
 
-    /**
-     * Refresh user favorites from API
-     */
+    /** Refresh favorites from API */
     refreshUserFavorites(): void {
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('username');
@@ -160,7 +136,6 @@ export class UserProfileComponent implements OnInit {
 
         this.fetchApiData.getUser(username, token).subscribe((user: any) => {
             localStorage.setItem('user', JSON.stringify(user));
-
             const favoriteIds: string[] = user.FavoriteMovies || [];
             this.fetchApiData.getAllMovies().subscribe((allMovies: any[]) => {
                 this.favoriteMovies = allMovies.filter(m => favoriteIds.includes(m._id));
@@ -168,16 +143,13 @@ export class UserProfileComponent implements OnInit {
         });
     }
 
-    // stubs for dialogs
-    openGenreDialog(genre: any): void {
-        console.log('Open genre dialog:', genre);
-    }
-
-    openDirectorDialog(director: any): void {
-        console.log('Open director dialog:', director);
-    }
-
-    openMovieDetailsDialog(movie: any): void {
-        console.log('Open details dialog:', movie);
+    /** Open synopsis dialog */
+    openSynopsisDialog(movie: any): void {
+        this.dialog.open(SynopsisDialogComponent, {
+            data: { title: movie.title, description: movie.description },
+            width: '500px',
+            maxHeight: '80vh',
+            panelClass: 'custom-dialog'
+        });
     }
 }

@@ -1,140 +1,138 @@
 <!DOCTYPE html>
 <div class="profile-container">
-  <h2>User Profile</h2>
+    <h2>User Profile</h2>
 
-<mat-card class="profile-card">
-  <mat-card-header>
-    <mat-card-title>Your personal information</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-
-    <!-- Username -->
-    <div>
-      <strong>Username:</strong>
-      <ng-container *ngIf="editingField !== 'Username'; else editUsername">
-        {{ user.Username }}
-        <button mat-icon-button (click)="startEdit('Username')">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </ng-container>
-      <ng-template #editUsername>
-        <mat-form-field>
-          <input matInput [(ngModel)]="tempValue" />
-        </mat-form-field>
-        <button mat-icon-button color="primary" (click)="saveEdit('Username')">
-          <mat-icon>check</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="cancelEdit()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </ng-template>
-    </div>
-
-    <!-- Email -->
-    <div>
-      <strong>Email:</strong>
-      <ng-container *ngIf="editingField !== 'Email'; else editEmail">
-        {{ user.Email }}
-        <button mat-icon-button (click)="startEdit('Email')">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </ng-container>
-      <ng-template #editEmail>
-        <mat-form-field>
-          <input matInput [(ngModel)]="tempValue" type="email" />
-        </mat-form-field>
-        <button mat-icon-button color="primary" (click)="saveEdit('Email')">
-          <mat-icon>check</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="cancelEdit()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </ng-template>
-    </div>
-
-    <!-- Birthday -->
-    <div>
-      <strong>Birthday:</strong>
-      <ng-container *ngIf="editingField !== 'BirthdayISO'; else editBirthday">
-        {{ user.BirthdayISO }}
-        <button mat-icon-button (click)="startEdit('BirthdayISO')">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </ng-container>
-      <ng-template #editBirthday>
-        <mat-form-field>
-          <input matInput [(ngModel)]="tempValue" type="date" />
-        </mat-form-field>
-        <button mat-icon-button color="primary" (click)="saveEdit('BirthdayISO')">
-          <mat-icon>check</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="cancelEdit()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </ng-template>
-    </div>
-
-    <!-- Password -->
-    <div>
-      <strong>Password:</strong>
-      <ng-container *ngIf="editingField !== 'Password'; else editPassword">
-        ********
-        <button mat-icon-button (click)="startEdit('Password')">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </ng-container>
-      <ng-template #editPassword>
-        <mat-form-field>
-          <input matInput [(ngModel)]="currentPassword" type="password" placeholder="Current password" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [(ngModel)]="newPassword" type="password" placeholder="New password" />
-        </mat-form-field>
-        <button mat-icon-button color="primary" (click)="saveEdit('Password')">
-          <mat-icon>check</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="cancelEdit()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </ng-template>
-    </div>
-
-  </mat-card-content>
-</mat-card>
-
-<mat-card class="favorites-card">
-  <mat-card-header>
-    <mat-card-title>Your Favorite Movies</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="favorites-grid">
-      <mat-card *ngFor="let movie of favoriteMovies" class="movie-card mat-elevation-z4">
-        
-        <!-- Header always at top -->
-        <mat-card-header class="movie-header">
-          <mat-card-title>{{ movie.title }}</mat-card-title>
-          <mat-card-subtitle>Directed by: {{ movie.director.name }}</mat-card-subtitle>
+    <mat-card class="profile-card">
+        <mat-card-header>
+            <mat-card-title>Your personal information</mat-card-title>
         </mat-card-header>
+        <mat-card-content>
 
-        <!-- Image in its own block -->
-        <img mat-card-image [src]="movie.imagePath" alt="{{ movie.title }}" />
+            <!-- Username -->
+            <div>
+                <strong>Username:</strong>
+                <ng-container *ngIf="editingField !== 'Username'; else editUsername">
+                    {{ user.Username }}
+                    <button mat-icon-button (click)="startEdit('Username')">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </ng-container>
+                <ng-template #editUsername>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="tempValue" />
+                    </mat-form-field>
+                    <button mat-icon-button color="primary" (click)="saveEdit('Username')">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="cancelEdit()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </ng-template>
+            </div>
 
-        <!-- Actions at bottom -->
-        <mat-card-actions>
-          <button mat-button color="primary" (click)="openGenreDialog(movie.genre)">
-            Genre
-          </button>
-          <button mat-button color="primary" (click)="openDirectorDialog(movie.director)">
-            Director
-          </button>
-          <button mat-button color="primary" (click)="openMovieDetailsDialog(movie)">
-            Details
-          </button>
-          <button mat-icon-button color="warn" (click)="removeFavorite(movie._id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </mat-card-content>
-</mat-card>
+            <!-- Email -->
+            <div>
+                <strong>Email:</strong>
+                <ng-container *ngIf="editingField !== 'Email'; else editEmail">
+                    {{ user.Email }}
+                    <button mat-icon-button (click)="startEdit('Email')">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </ng-container>
+                <ng-template #editEmail>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="tempValue" type="email" />
+                    </mat-form-field>
+                    <button mat-icon-button color="primary" (click)="saveEdit('Email')">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="cancelEdit()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </ng-template>
+            </div>
+
+            <!-- Birthday -->
+            <div>
+                <strong>Birthday:</strong>
+                <ng-container *ngIf="editingField !== 'BirthdayISO'; else editBirthday">
+                    {{ user.BirthdayISO }}
+                    <button mat-icon-button (click)="startEdit('BirthdayISO')">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </ng-container>
+                <ng-template #editBirthday>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="tempValue" type="date" />
+                    </mat-form-field>
+                    <button mat-icon-button color="primary" (click)="saveEdit('BirthdayISO')">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="cancelEdit()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </ng-template>
+            </div>
+
+            <!-- Password -->
+            <div>
+                <strong>Password:</strong>
+                <ng-container *ngIf="editingField !== 'Password'; else editPassword">
+                    ********
+                    <button mat-icon-button (click)="startEdit('Password')">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </ng-container>
+                <ng-template #editPassword>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="currentPassword" type="password" placeholder="Current password" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="newPassword" type="password" placeholder="New password" />
+                    </mat-form-field>
+                    <button mat-icon-button color="primary" (click)="saveEdit('Password')">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="cancelEdit()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </ng-template>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="favorites-card">
+        <mat-card-header>
+            <mat-card-title>Your Favorite Movies</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="favorites-grid">
+                <mat-card *ngFor="let movie of favoriteMovies" class="movie-card mat-elevation-z4">
+
+                    <!-- Header always at top -->
+                    <mat-card-header class="movie-header">
+                        <mat-card-title>{{ movie.title }}</mat-card-title>
+                        <mat-card-subtitle>Directed by: {{ movie.director.name }}</mat-card-subtitle>
+                    </mat-card-header>
+
+                    <!-- Image in its own block -->
+                    <img mat-card-image [src]="movie.imagePath" alt="{{ movie.title }}" />
+
+                    <!-- Actions at bottom -->
+                    <mat-card-actions style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex: 1; text-align: center;">
+                            <button mat-button color="primary" (click)="openSynopsisDialog(movie)">
+                                Synopsis
+                            </button>
+                        </div>
+                        <div style="flex: 0;">
+                            <button mat-icon-button color="warn" (click)="removeFavorite(movie._id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </mat-card-content>
+    </mat-card>
