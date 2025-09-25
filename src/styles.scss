@@ -63,3 +63,25 @@ body, html {
   background-color: #e53935 !important;
   color: #ffffff !important;
 }
+
+/* Preventing all Material hover/pressed/focus overlays */
+.mat-mdc-button .mdc-button__ripple,
+.mat-mdc-unelevated-button .mdc-button__ripple,
+.mat-mdc-outlined-button .mdc-button__ripple {
+  display: none !important;
+}
+
+.mat-mdc-button .mat-mdc-button-persistent-ripple,
+.mat-mdc-unelevated-button .mat-mdc-button-persistent-ripple,
+.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple {
+  display: none !important;
+}
+
+/* Glow shadow on hover and makes sure no background color sneaks in */
+.mat-mdc-button:hover,
+.mat-mdc-unelevated-button:hover,
+.mat-mdc-outlined-button:hover {
+  background-color: transparent !important;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.842),
+               0 0 12px rgba(0, 191, 255, 0.589);
+}
