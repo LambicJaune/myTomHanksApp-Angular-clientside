@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 const apiUrl = 'https://mytomhanksapp-3bff0bf9ef19.herokuapp.com/';
 
@@ -9,7 +10,7 @@ const apiUrl = 'https://mytomhanksapp-3bff0bf9ef19.herokuapp.com/';
     providedIn: 'root'
 })
 export class FetchApiDataService {
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private router: Router) { }
 
     private extractResponseData(res: any): any {
         return res || {};
@@ -142,5 +143,13 @@ export class FetchApiDataService {
             map(this.extractResponseData),
             catchError(this.handleError)
         );
+    }
+
+    // ================
+    // Logout
+    // ================
+    logout(): void {
+        localStorage.clear(); // remove token + username
+        this.router.navigate(['/welcome']); // redirect to login/welcome
     }
 }

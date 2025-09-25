@@ -157,4 +157,8 @@ export class MovieCardComponent implements OnInit {
       panelClass: 'custom-dialog'
     });
   }
+
+  logout(): void {
+  this.fetchApiData.logout();
+}
 }

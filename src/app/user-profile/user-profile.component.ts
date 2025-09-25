@@ -152,4 +152,8 @@ export class UserProfileComponent implements OnInit {
             panelClass: 'custom-dialog'
         });
     }
+
+    logout(): void {
+        this.fetchApiData.logout();
+    }
 }
