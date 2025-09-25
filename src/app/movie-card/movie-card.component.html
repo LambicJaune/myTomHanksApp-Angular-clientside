@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<div style="text-align: center; margin: 1.5rem;">
+<div style="text-align: center; margin-top: 2rem; margin-bottom: 0.5rem;">
   <button mat-raised-button color="accent" routerLink="/profile">
-    Go to Profile
+    User Profile
   </button>
 </div>
 <div style="text-align: center; margin-top: 1.5rem; margin-bottom: 1rem;" *ngIf="filtered">
@@ -10,7 +10,7 @@
   </button>
 </div>
 
-<div style="padding-top: 3rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+<div style="padding-top: 3rem; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
   <mat-card *ngFor="let movie of movies" style="flex: 1 1 calc(300px); max-width: 300px;">
     <mat-card-header>
       <mat-card-title>{{ movie.title }}</mat-card-title>
@@ -20,22 +20,22 @@
 
     <mat-card-actions>
       <!-- Genre button: still filters -->
-      <button mat-button color="primary" style="margin: 0.5rem;" (click)="getGenre(movie.genre.name)">
+      <button mat-button color="white" style="margin: 0.5rem;" (click)="getGenre(movie.genre.name)">
         Genre: {{ movie.genre.name }}
       </button>
 
       <!-- Director button: opens dialog -->
-      <button mat-button color="primary" (click)="openDirectorDialog(movie.director)">
+      <button mat-button color="white" (click)="openDirectorDialog(movie.director)">
         Director: {{ movie.director.name }}
       </button>
 
       <!-- Synopsis button: opens dialog -->
-      <button mat-button color="primary" (click)="openSynopsisDialog(movie)">
+      <button mat-button color="white" (click)="openSynopsisDialog(movie)">
         Synopsis
       </button>
 
       <!-- Favorite button -->
-      <button mat-icon-button color="warn" (click)="toggleFavorite(movie)">
+      <button mat-icon-button color="accent" (click)="toggleFavorite(movie)">
         <mat-icon>{{ isFavorite(movie) ? 'favorite' : 'favorite_border' }}</mat-icon>
       </button>
     </mat-card-actions>

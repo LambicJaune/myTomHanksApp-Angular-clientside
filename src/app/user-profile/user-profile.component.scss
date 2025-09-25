@@ -1,38 +1,59 @@
 .profile-container {
-  padding: 1rem;
+    padding: 1rem;
 }
 
 .profile-card {
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
+    background-color: rgba(43, 47, 51, 0.445);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); // subtle white shadow
+    text-align: center;
 }
 
+.favorites-card {
+    background-color: rgba(43, 47, 51, 0.445);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); // subtle white shadow
+}
+
+/* Grid container for favorite movies */
 .favorites-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 270px));
+    justify-content: center;
+    gap: 16px;
+    border-radius: 12px;
 }
 
+/* Individual movie cards */
 .movie-card {
-  display: flex;
-  flex-direction: column;
-  height: auto;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    border-radius: 12px;
+    background-color: rgb(68, 80, 92); // card background
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); // subtle white shadow
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+    }
+
+    img {
+        max-height: 350px;
+        width: 100%;
+        object-fit: cover;
+    }
 }
 
-.movie-header {
-  flex-shrink: 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12); /* subtle separator */
+/* Centered header/title inside the card */
+mat-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 0.7rem;
 }
 
-.movie-card img {
-  object-fit: contain; /* no cropping */
-  max-height: 350px;
-  width: 100%;
+mat-card-title {
+    padding-bottom: 0.2rem;
 }
-
-.movie-card mat-card-actions {
-  margin-top: auto;
-}
-
-
-

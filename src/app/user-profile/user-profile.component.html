@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <div class="profile-container">
     <div style="text-align: center; margin-bottom: 2rem;">
-        <button mat-raised-button color="primary" routerLink="/movies">
+        <button mat-raised-button color="accent" routerLink="/movies">
             Back to the Movies list
         </button>
     </div>
@@ -126,12 +126,12 @@
                     <!-- Actions at bottom -->
                     <mat-card-actions style="display: flex; justify-content: space-between; align-items: center;">
                         <div style="flex: 1; text-align: center;">
-                            <button mat-button color="primary" (click)="openSynopsisDialog(movie)">
+                            <button mat-button color="white" (click)="openSynopsisDialog(movie)">
                                 Synopsis
                             </button>
                         </div>
                         <div style="flex: 0;">
-                            <button mat-icon-button color="warn" (click)="removeFavorite(movie._id)">
+                            <button mat-icon-button color="accent" (click)="removeFavorite(movie._id)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </div>

@@ -1,33 +1,65 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
-html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+// 1. Brand palettes (inspired by Xumo Play: dark navy + bright cyan/teal)
+$custom-primary: mat.m2-define-palette(mat.$m2-blue-grey-palette, 900, 700, 100);
+$custom-accent: mat.m2-define-palette(mat.$m2-cyan-palette, 400, 200, 600);
+$custom-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+// 2. Typography
+$custom-typography: mat.m2-define-typography-config(
+  $font-family: 'Roboto, Helvetica Neue, sans-serif'
+);
+
+// 3. Density
+$custom-density: 0;
+
+// 4. Dark theme
+$custom-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $custom-primary,
+    accent: $custom-accent,
+    warn: $custom-warn,
+  ),
+  typography: $custom-typography,
+  density: $custom-density,
+));
+
+// 5. Apply theme globally
+@include mat.all-component-themes($custom-theme);
+
+// ===== Base App Styling =====
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(to right, #0f2027, #1c3541d5, #0f2027);  
+  color: white;
+  position: relative;
+  overflow-x: hidden;
 }
-// Custom Theming for Angular Material
-// For more information: https://material.angular.dev/guide/theming
 
-html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
-}/* You can add global styles to this file, and also import other style files */
+// ===== Dialog Styling =====
+.cdk-overlay-pane.custom-dialog .mat-mdc-dialog-surface {
+  border-radius: 16px !important;
+  padding: 24px !important;
+  max-height: 80vh !important;
+  overflow: auto !important;
+  background: #0f2027 !important;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.384) !important;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// ===== Button Styling =====
+.mat-mdc-raised-button.mat-primary {
+  background-color: #00e5ff !important; // bright cyan
+  color: #0b0e17 !important; // dark navy text
+}
+
+.mat-mdc-raised-button.mat-accent {
+  background-color: #0097a7 !important;
+  color: #ffffff !important;
+}
+
+.mat-mdc-raised-button.mat-warn {
+  background-color: #e53935 !important;
+  color: #ffffff !important;
+}
