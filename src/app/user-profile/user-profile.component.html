@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <div class="profile-container">
-    <div style="text-align: center; margin-bottom: 2rem;">
+    <div class="nav-buttons">
         <button mat-raised-button color="accent" routerLink="/movies">
             Back to the Movies list
+        </button>
+        <button mat-raised-button color="accent" (click)="logout()">
+            Logout
         </button>
     </div>
     <h2>User Profile</h2>
@@ -140,3 +143,4 @@
             </div>
         </mat-card-content>
     </mat-card>
+    </div>

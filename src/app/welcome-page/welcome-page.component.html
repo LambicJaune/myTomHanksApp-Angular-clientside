@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <div class="main-page">
-    <h1>
-      Welcome to myTomHanksApp!
-    </h1>
-    <button
-      mat-raised-button
-      (click)="openUserRegistrationDialog()"
-      style="margin-right: 10px;"
-      color="primary"
-    >
-      Sign Up
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="openUserLoginDialog()"
-      style="margin-right: 10px;"
-    >
-      Login
-    </button>
-  </div>
+    <h1>Welcome !</h1>
+    <h2>Life is like a box of movies.</h2> <h2>You never know what you're gonna discover.</h2>
+    <div class="welcome-buttons">
+        <button mat-raised-button (click)="openUserRegistrationDialog()" color="primary">
+            Sign Up
+        </button>
+        <button mat-raised-button (click)="openUserLoginDialog()" color="primary">
+            Login
+        </button>
+    </div>
+</div>

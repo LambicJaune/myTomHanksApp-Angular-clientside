@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<div style="text-align: center; margin-top: 2rem; margin-bottom: 0.5rem;">
+<div class="nav-buttons">
   <button mat-raised-button color="accent" routerLink="/profile">
     User Profile
+  </button>
+  <button mat-raised-button color="accent" (click)="logout()">
+    Logout
   </button>
 </div>
 <div style="text-align: center; margin-top: 1.5rem; margin-bottom: 1rem;" *ngIf="filtered">

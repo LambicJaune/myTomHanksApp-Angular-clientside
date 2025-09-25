@@ -1,0 +1,12 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* vertical centering */
+  align-items: center;       /* horizontal centering */
+  min-height: calc(50vh - 100px);         /* full screen height */
+  text-align: center;
+}
+
+.welcome-buttons {
+    gap: 2rem;
+}

@@ -85,3 +85,50 @@ body, html {
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.842),
                0 0 12px rgba(0, 191, 255, 0.589);
 }
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.app-logo {
+  width: 150px;
+  max-width: 40vw;
+  height: auto;
+}
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 180px); 
+  text-align: center;
+}
+
+.welcome-buttons {
+  display: flex;
+  gap: 1rem; 
+  margin-top: 2rem;
+  flex-wrap: wrap;
+
+  button {
+    margin: 0; // reset Angular Material default margins
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-buttons {
+    flex-direction: column;
+    gap: 0.8rem; // smaller vertical spacing on mobile
+    align-items: center;
+  }
+}
