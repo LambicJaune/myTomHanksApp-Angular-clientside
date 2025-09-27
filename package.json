@@ -2,11 +2,9 @@
   "name": "my-tom-hanks-app-angular-clientside",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "deploy": "npx angular-cli-ghpages --dir=dist/my-tom-hanks-app-angular-clientside/browser"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +28,7 @@
     "@angular/cli": "^19.1.0",
     "@angular/compiler-cli": "^19.1.0",
     "@types/jasmine": "~5.1.0",
+    "angular-cli-ghpages": "^2.0.3",
     "jasmine-core": "~5.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

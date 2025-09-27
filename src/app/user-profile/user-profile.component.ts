@@ -36,7 +36,7 @@ export class UserProfileComponent implements OnInit {
         this.getUser();
     }
 
-    /** Get user data and hydrate favorites */
+    /** Get user data and feed favorites */
     getUser(): void {
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('username');
