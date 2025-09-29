@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { FetchApiDataService } from '../fetch-api-data.service';
 
-// Define a type-safe interface for the backend user
+/* Define a type-safe interface for the backend user */
 interface BackendUser {
     Username: string;
     Email: string;
@@ -13,7 +13,7 @@ interface BackendUser {
     FavoriteMovies?: string[];
 }
 
-// Define a normalized frontend user type
+/* Define a normalized frontend user type */
 interface FrontendUser {
     username: string;
     email: string;
@@ -28,6 +28,8 @@ interface FrontendUser {
     styleUrls: ['./user-login-form.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
+
+    /** Data bound to the login form. */
     @Input() userData = { username: '', password: '' };
 
     constructor(
@@ -37,15 +39,17 @@ export class UserLoginFormComponent implements OnInit {
         private router: Router
     ) { }
 
+    /** Lifecycle hook: component initialization */
     ngOnInit(): void { }
 
     /**
      * Sends the login request to the backend and stores normalized user info
+     * navigates to the movies pages on success
      */
     userLogin(): void {
         this.fetchApiData.userLogin(this.userData).subscribe(
             (result: { user: BackendUser; token: string }) => {
-                // Normalize backend user to frontend lowercase keys
+                /** Normalize backend user to frontend lowercase keys */
                 const loggedInUser: FrontendUser = {
                     username: result.user.Username,
                     email: result.user.Email,
@@ -53,7 +57,7 @@ export class UserLoginFormComponent implements OnInit {
                     favoriteMovies: result.user.FavoriteMovies || []
                 };
 
-                // Save to localStorage
+                /** Save to localStorage */
                 localStorage.setItem('user', JSON.stringify(loggedInUser));
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('username', loggedInUser.username);

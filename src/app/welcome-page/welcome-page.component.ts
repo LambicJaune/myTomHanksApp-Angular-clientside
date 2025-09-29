@@ -11,7 +11,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 export class WelcomePageComponent implements OnInit {
+    
+    /**
+     * Creates the welcome page component.
+     * @param dialog Angular Material dialog service for opening login/registration forms.
+     */
     constructor(public dialog: MatDialog) { }
+
+    /** Lifecycle hook called after component initialization. */
     ngOnInit(): void {
     }
     openUserRegistrationDialog(): void {

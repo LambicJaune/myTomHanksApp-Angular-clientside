@@ -12,9 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
+
+    /** List of movies to display */
     movies: any[] = [];
 
-    filtered: boolean = false; // Tracks if we're showing a filtered list
+    /** Tracks whether the list is filtered by genre/director or not */
+    filtered: boolean = false; 
 
     constructor(
         public fetchApiData: FetchApiDataService,
@@ -22,12 +25,13 @@ export class MovieCardComponent implements OnInit {
         private dialog: MatDialog
     ) { }
 
+    /** Lifecycle hook: fetches all movies on initialization */
     ngOnInit(): void {
         this.getMovies();
     }
 
     /**
-     * Returning all movies
+     * Returns all movies from API
      */
     getMovies(): void {
         this.fetchApiData.getAllMovies().subscribe((resp: any) => {
@@ -38,7 +42,7 @@ export class MovieCardComponent implements OnInit {
     }
 
     /**
-     * Returning the genre of the movie and updating main movie grid
+     * Filters movies by genre
      */
     getGenre(genreName: string): void {
         this.fetchApiData.getGenre(genreName).subscribe({
@@ -55,7 +59,7 @@ export class MovieCardComponent implements OnInit {
     }
 
     /**
-     * Returning the name of the director and updating main movie grid
+     * Filters movies by director
      */
     getDirector(directorName: string): void {
         this.fetchApiData.getDirector(directorName).subscribe({
@@ -105,7 +109,7 @@ export class MovieCardComponent implements OnInit {
     }
 
     /**
-     * Toggle movie in/out of favorites
+     * Toggles movie in/out of favorites
      */
     toggleFavorite(movie: any): void {
         if (this.isFavorite(movie)) {
@@ -122,7 +126,7 @@ export class MovieCardComponent implements OnInit {
     }
 
     /**
-     * Refresh user data in local storage to update favorites
+     * Refreshes user data in local storage to update favorites
      */
     refreshUserFavorites(): void {
         const token = localStorage.getItem('token');
@@ -135,7 +139,7 @@ export class MovieCardComponent implements OnInit {
     }
 
 /**
-   * Open a dialog with director info
+   * Opens a dialog with director info
    */
   openDirectorDialog(director: any): void {
     this.dialog.open(DirectorDialogComponent, {
@@ -147,7 +151,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * Open a dialog with the movie synopsis
+   * Opens a dialog with the movie synopsis
    */
   openSynopsisDialog(movie: any): void {
     this.dialog.open(SynopsisDialogComponent, {
@@ -158,6 +162,7 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+    /** Logs out the user. */
   logout(): void {
   this.fetchApiData.logout();
 }
