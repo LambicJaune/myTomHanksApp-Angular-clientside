@@ -12,16 +12,24 @@ import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.comp
     styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+
+    /** Current user object with username, email, and birthday. */
     user: any = {
         Username: '',
         Email: '',
         Birthday: ''
     };
 
+    /** User’s favorite movies. */
     favoriteMovies: any[] = [];
-    editingField: string | null = null; // which field is being edited
-    tempValue: string = '';             // temporary value while editing
 
+    /** Field currently being edited. */
+    editingField: string | null = null; 
+
+    /** Temporary value while editing. */
+    tempValue: string = '';         
+
+    /** Password fields for update. */
     currentPassword: string = '';
     newPassword: string = '';
 
@@ -32,11 +40,12 @@ export class UserProfileComponent implements OnInit {
         public router: Router
     ) { }
 
+       /** Lifecycle hook: loads user on initialization */
     ngOnInit(): void {
         this.getUser();
     }
 
-    /** Get user data and feed favorites */
+    /** Get user data and favorites from the API */
     getUser(): void {
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('username');
@@ -67,7 +76,7 @@ export class UserProfileComponent implements OnInit {
         }
     }
 
-    /** Cancel editing */
+    /** Cancel editing state */
     cancelEdit(): void {
         this.editingField = null;
         this.tempValue = '';
@@ -152,7 +161,8 @@ export class UserProfileComponent implements OnInit {
             panelClass: 'custom-dialog'
         });
     }
-
+    
+    /** Logs out the user. */
     logout(): void {
         this.fetchApiData.logout();
     }

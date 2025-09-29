@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
+// Angular Material modules
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+// App components
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
@@ -31,6 +33,12 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 
+/**
+ * Root Angular module.
+ *
+ * Declares all application components, imports Angular Material modules,
+ * sets up routing, and bootstraps {@link AppComponent}.
+ */
 @NgModule({
     declarations: [
         AppComponent,
